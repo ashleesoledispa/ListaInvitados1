@@ -38,4 +38,10 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Invitados}/{action=Index}/{id?}");
 
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    db.Database.Migrate();
+}
+
 app.Run();
