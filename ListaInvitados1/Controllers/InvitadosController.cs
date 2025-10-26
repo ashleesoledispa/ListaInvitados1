@@ -82,5 +82,13 @@ namespace ListaInvitados1.Controllers
             public int Id { get; set; }
             public bool Registrado { get; set; }
         }
+        [HttpPost]
+        public async Task<IActionResult> EliminarTodos()
+        {
+            _context.Invitados.RemoveRange(_context.Invitados);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }

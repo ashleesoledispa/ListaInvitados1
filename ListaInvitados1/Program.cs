@@ -1,5 +1,6 @@
 using ListaInvitados1.Data;
 using Microsoft.EntityFrameworkCore;
+using Npgsql.EntityFrameworkCore.PostgreSQL; // <-- importante
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,9 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 // =======================================
 builder.Services.AddControllersWithViews();
 
-// Base de datos SQLite
+// Base de datos PostgreSQL
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // =======================================
 // CONSTRUCCIÓN DE LA APP
@@ -30,14 +31,14 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
 app.UseAuthorization();
 
-// Ruta por defecto: abre Invitados/Index
+// Ruta por defecto
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Invitados}/{action=Index}/{id?}");
 
+// Aplicar migraciones automáticas al iniciar
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();

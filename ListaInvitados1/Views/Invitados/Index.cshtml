@@ -168,7 +168,12 @@
     <div class="d-flex justify-content-center gap-2 mb-3" style="display:flex; gap:10px; justify-content:center;">
         <button id="btnVerLista" class="btn">Ver lista completa</button>
         <button id="btnImportar" class="btn">Importar lista</button>
+        <form asp-action="EliminarTodos" method="post" onsubmit="return confirm('¿Estás seguro de eliminar toda la lista? Esta acción no se puede deshacer.');">
+            <button type="submit" class="btn btn-danger">Eliminar toda la lista</button>
+        </form>
+
     </div>
+
 
     <!-- FORMULARIO DE IMPORTACIÓN -->
     <div id="importarContainer" style="display:none;" class="mt-3">
