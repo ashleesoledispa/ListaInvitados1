@@ -2,5 +2,6 @@
   - type: web
     name: listainvitados1
     env: docker
+    dockerfilePath: ./Dockerfile
     plan: free
     region: oregon
