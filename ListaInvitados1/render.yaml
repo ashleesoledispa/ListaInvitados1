@@ -1,0 +1,6 @@
+﻿services:
+  - type: web
+    name: listainvitados1
+    env: docker
+    plan: free
+    region: oregon
